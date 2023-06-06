@@ -170,11 +170,6 @@ addEventListener('click', (e) => {
         });
     }
 });
-addEventListener('click', (e) => {
-    if (e.target.classList.contains('finish')) {
-        nextLevel();
-    }
-});
 
 function restartGame() {
     alert('You lose!');
