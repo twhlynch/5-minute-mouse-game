@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+    </style>
+    <script defer="defer">
+        var array = [];
+var isDragging = false; // Flag to track dragging state
+var flippedIndices = new Set(); // Set to store indices of flipped divs
+
+for (var i = 0; i < 400; i++) {
+    array.push(1);
+}
+
+function flipValue(index) {
+    array[index] = 1 - array[index];
+    renderArray();
+}
+
+function handleMouseDown(index) {
+    isDragging = true;
+    flippedIndices.add(index);
+    flipValue(index);
+}
+
+function handleMouseEnter(index) {
+    if (isDragging && !flippedIndices.has(index)) {
+        flippedIndices.add(index);
+        flipValue(index);
+    }
+}
+
+function handleMouseUp() {
+    isDragging = false;
+    flippedIndices.clear();
+}
+
+function renderArray() {
+    var container = document.getElementById('array-container');
+    container.innerHTML = '';
+    array.forEach(function (value, index) {
+        var cell = document.createElement('div');
+        cell.className = 'cell';
+        if (value === 1) {
+            cell.classList.add('path');
+        } else {
+            cell.classList.add('wall');
+        }
+
+        cell.addEventListener('mousedown', function () {
+            handleMouseDown(index);
+        });
+
+        cell.addEventListener('mouseenter', function () {
+            handleMouseEnter(index);
+        });
+
+        cell.addEventListener('mouseup', function () {
+            handleMouseUp();
+        });
+
+        container.appendChild(cell);
+    });
+}
+
+function copyArray() {
+    var arrayString = array.join(', ');
+    navigator.clipboard.writeText(arrayString).then(function () {
+        alert('Array copied to clipboard!');
+    });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+    renderArray();
+    document.getElementById('copy-button').addEventListener('click', copyArray);
+});
+
+    </script>
+</head>
+<body>
+    <div id="array-container" class="stage"></div>
+    <button onclick="copyArray()">Copy Array</button>
+</body>
+</html>

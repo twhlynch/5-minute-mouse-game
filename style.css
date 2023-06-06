@@ -13,21 +13,25 @@ body, html {
     background-color: #0f0;
     height: 20px;
     width: 20px;
+    cursor: pointer;
 }
 .finish {
     background-color: #f00;
     height: 20px;
     width: 20px;
+    cursor: pointer;
 }
 .path {
     background-color: #fff;
     height: 20px;
     width: 20px;
+    cursor: crosshair;
 }
 .wall {
     background-color: #000;
     height: 20px;
     width: 20px;
+    cursor: not-allowed;
 }
 
 .stage {
