@@ -259,6 +259,10 @@ function nextLevel() {
     }
 }
 
+addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
+
 addEventListener('keydown', (e) => {
     if (e.which == 13) {
         nextLevel();
